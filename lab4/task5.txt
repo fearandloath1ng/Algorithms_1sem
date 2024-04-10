@@ -1,0 +1,11 @@
+10
+push 345
+push 10000
+max
+pop
+push 5
+max
+push 10
+push 10
+max 
+pop
