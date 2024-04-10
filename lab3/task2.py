@@ -43,6 +43,29 @@ import time
  
 t_start = time.perf_counter()
 
+def swap(a, i, j):
+    a[i], a[j] = a[j], a[i]
 
+def antiQuickSortPermutation(n):
+    perm = list(range(1, n + 1))
+
+    for i in range(2, n):
+        swap(perm, i // 2, i)
+
+    return perm
+
+def main():
+    with open('task2.txt', 'r') as f:
+        n = int(f.read())
+
+    perm = antiQuickSortPermutation(n)
+
+    with open('output.txt', 'w') as f:
+        for x in perm:
+            f.write(f"{x} ")
+        f.write('\n')
+
+if __name__ == "__main__":
+    main()
 
 print("Время работы: %s секунд " % (time.perf_counter() - t_start))

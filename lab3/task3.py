@@ -22,6 +22,24 @@ import time
  
 t_start = time.perf_counter()
 
+def check_sort(arr, k):
+    n = len(arr)
+    for i in range(n - k):
+        if arr[i] > arr[i + k]:
+            arr[i], arr[i + k] = arr[i + k], arr[i]
+    for i in range(n - 1):
+        if arr[i] > arr[i + 1]:
+            return False
+    return True
 
+with open('task3.txt', 'r') as file:
+   n, k = map(int, file.readline().split())
+   arr = list(map(int, file.readline().split()))
+
+with open('output.txt', 'w') as file:
+   if check_sort(arr, k):
+      file.write('ДА')
+   else:
+      file.write('НЕТ')
 
 print("Время работы: %s секунд " % (time.perf_counter() - t_start))
