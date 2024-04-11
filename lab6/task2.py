@@ -32,6 +32,48 @@ import time
  
 t_start = time.perf_counter()
 
+class PhoneBookManager:
+    def __init__(self):
+        self.phone_book = {}
 
+    def add_contact(self, number, name):
+        self.phone_book[number] = name
+
+    def del_contact(self, number):
+        if number in self.phone_book:
+            del self.phone_book[number]
+
+    def find_contact(self, number):
+        if number in self.phone_book:
+            return self.phone_book[number]
+        else:
+            return "not found"
+
+    def process_queries(self, queries):
+        results = []
+        for query in queries:
+            query_parts = query.split()
+            command = query_parts[0]
+            number = query_parts[1]
+            if command == "add":
+                name = query_parts[2]
+                self.add_contact(number, name)
+            elif command == "del":
+                self.del_contact(number)
+            elif command == "find":
+                result = self.find_contact(number)
+                results.append(result)
+        return results
+
+with open("task2.txt", "r") as file:
+    n = int(file.readline())
+    queries = [file.readline().strip() for _ in range(n)]
+
+manager = PhoneBookManager()
+results = manager.process_queries(queries)
+
+with open("output.txt", "w") as file:
+    for result in results:
+        file.write(result + "\n")
 
 print("Время работы: %s секунд " % (time.perf_counter() - t_start))

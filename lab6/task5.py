@@ -24,6 +24,27 @@ import time
  
 t_start = time.perf_counter()
 
+def election_results():
+    with open('task5.txt', 'r') as file:
+        data = file.readlines()
 
+    results = {}
+
+    for line in data:
+        candidate, votes = line.strip().split(' ')
+        votes = int(votes)
+
+        if candidate not in results:
+            results[candidate] = votes
+        else:
+            results[candidate] += votes
+
+    candidates = sorted(results.keys())
+
+    with open('output.txt', 'w') as file:
+        for candidate in candidates:
+            file.write(f"{candidate} {results[candidate]}\n")
+
+election_results()
 
 print("Время работы: %s секунд " % (time.perf_counter() - t_start))

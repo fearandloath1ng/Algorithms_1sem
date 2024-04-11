@@ -24,6 +24,19 @@ import time
  
 t_start = time.perf_counter()
 
+def is_fibonacci(num):
+    a, b = 0, 1
+    while a < num:
+        a, b = b, a + b
+    return a == num
 
+with open('task6.txt', 'r') as input_file, open('output.txt', 'w') as output_file:
+    n = int(input_file.readline().strip())
+    for _ in range(n):
+        number = int(input_file.readline().strip())
+        if is_fibonacci(number):
+            output_file.write('Yes\n')
+        else:
+            output_file.write('No\n')
 
 print("Время работы: %s секунд " % (time.perf_counter() - t_start))
